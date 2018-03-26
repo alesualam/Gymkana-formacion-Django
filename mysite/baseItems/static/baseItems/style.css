@@ -1,0 +1,23 @@
+.title{
+    background-color: green;
+    padding: 1%;
+    width: 10.2%;
+}
+
+h1{
+    color: blue;
+}
+
+a:hover{
+    background-color: green;
+    color: white;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: left;
+    margin-left: 10%;
+}
