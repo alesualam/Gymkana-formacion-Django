@@ -1,3 +1,10 @@
+{% extends "baseItems/layout.html" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'baseItems/style.css' %}">
+{% block title %}<div class="title">Event</div>{% endblock %}
+{% endblock %}
+{% block content %}
 <h2>{{ event.title }}</h2>
 <br>
 <h3>{{ event.subtitle }}</h3>
@@ -5,3 +12,4 @@
 <p>{{ event.body }}</p>
 <br>
 <p>Desde el {{ event.start_date }} hasta el {{ event.end_date }}</p>
+{% endblock %}

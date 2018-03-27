@@ -6,23 +6,28 @@
 {% endblock %}
 {% block content %}
     <div class="left">
-        <h1>Events</h1>
         {% if latest_events_list %}
+            <h1>Events</h1>
             <ul>
-            {% for event in latest_events_list %}
-                <li><a href="/baseItems/events/{{ event.id }}/">{{ event.title }}</a></li>
-            {% endfor %}
+                {% for event in latest_events_list %}
+                    <li><a href="{% url 'baseItems:detailEvent' event.id %}">{{ event.title }}</a></li>
+ 
+                {% endfor %}
             </ul>
+        {% else %}
+            <p>No events are available</p>
+        {% endif %}
     </div>
     <div class="right">
-        <h1>News</h1>
+        {% if latest_news_list %}
+            <h1>News</h1>
             <ul>
-            {% for new in latest_news_list %}
-                <li><a href="/baseItems/news/{{ new.id }}/">{{ new.title }}</a></li>
-            {% endfor %}
+                {% for new in latest_news_list %}
+                    <li><a href="{% url 'baseItems:detailNew' new.id %}">{{ new.title }}</a></li>
+                {% endfor %}
             </ul>
+        {% else %}
+            <p>No news are available</p>
+        {% endif %}
     </div>
-    {% else %}
-        <p>No events or news are available.</p>
-    {% endif %}
 {% endblock %}
