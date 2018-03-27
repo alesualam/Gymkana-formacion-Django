@@ -1,0 +1,28 @@
+{% extends "baseItems/layout.html" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'baseItems/style.css' %}">
+{% block title %}<div class="title">Lasts Events and News</div>{% endblock %}
+{% endblock %}
+{% block content %}
+    <div class="left">
+        <h1>Events</h1>
+        {% if latest_events_list %}
+            <ul>
+            {% for event in latest_events_list %}
+                <li><a href="/baseItems/events/{{ event.id }}/">{{ event.title }}</a></li>
+            {% endfor %}
+            </ul>
+    </div>
+    <div class="right">
+        <h1>News</h1>
+            <ul>
+            {% for new in latest_news_list %}
+                <li><a href="/baseItems/news/{{ new.id }}/">{{ new.title }}</a></li>
+            {% endfor %}
+            </ul>
+    </div>
+    {% else %}
+        <p>No events or news are available.</p>
+    {% endif %}
+{% endblock %}
