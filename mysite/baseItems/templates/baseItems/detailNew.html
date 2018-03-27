@@ -1,0 +1,9 @@
+{% extends "baseItems/layout.html" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'baseItems/style.css' %}">
+{% block title %}<div class="title">Event</div>{% endblock %}
+{% endblock %}
+{% block content %}
+<h2>{{ new.title }}</h2>
+{% endblock %}
