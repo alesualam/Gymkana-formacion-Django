@@ -1,0 +1,12 @@
+<h2>Noticias</h2>
+{% if news %}
+    <ul>
+        {% for new in news %}
+            <li>
+                <a href="{% url 'baseItems:detailNew' new.id %}">{{ new.title }} <br/> {{ new.subtitle }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay noticias disponibles</p>
+{% endif %}
