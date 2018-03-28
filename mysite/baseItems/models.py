@@ -16,8 +16,8 @@ class BaseItems(models.Model):
 
 
 class New(BaseItems):
-    publish_date = models.DateField()
-    image = models.ImageField(upload_to="img")
+    publish_date = models.DateField(auto_now_add=True)
+    image = models.ImageField(upload_to="img", default='/img/periodico.jpg')
 
 
 class Event(BaseItems):
