@@ -1,0 +1,8 @@
+<h2>Modificar noticia</h2>
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <input id="id_image" type="file" class="" name="image">
+    </p>
+    <button type="submit">Guardar</button>
+</form>
