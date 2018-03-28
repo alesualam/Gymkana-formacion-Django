@@ -11,4 +11,6 @@
 <img src="{{ new.image.url }}">
 <br/>
 {{ new.publish_date }}
+<br/>
+<a href="{% url 'baseItems:updateNew' new.id %}"><button type="button">Update New</button></a>
 {% endblock %}
