@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-import datetime
 
 
 class BaseItems(models.Model):
@@ -17,8 +16,8 @@ class BaseItems(models.Model):
 
 
 class New(BaseItems):
-    publish_date = models.DateField(default=datetime.date.today)
-    image = models.ImageField(upload_to="img", default='/img/periodico.jpg', max_length=10 * 1024 * 1024)
+    publish_date = models.DateField(auto_now_add=True)
+    image = models.ImageField(upload_to="img", default='/img/periodico.jpg')
 
 
 class Event(BaseItems):
