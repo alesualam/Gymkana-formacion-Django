@@ -28,7 +28,17 @@
         {% else %}
             <p>No news are available</p>
         {% endif %}
-        <a href="{% url 'baseItems:createNew' %}"><button type="button">Create New</button></a>
-        <a href="{% url 'baseItems:news' %}"><button type="button">List News</button></a>
+        <p>
+            Using Functions
+            <br/>
+            <a href="{% url 'baseItems:createNew' %}"><button type="button">Create New</button></a>
+            <a href="{% url 'baseItems:news' %}"><button type="button">List News</button></a>
+        </p>
+        <p>
+            Using Classes
+            <br/>
+            <a href="{% url 'baseItems:createNewClass' %}"><button type="button">Create New</button></a>
+            <a href="{% url 'baseItems:newsClass' %}"><button type="button">List News</button></a>
+        </p>
     </div>
 {% endblock %}
