@@ -1,4 +1,4 @@
-<h2>Noticias</h2>
+<h2>News</h2>
 {% if news %}
     <ul>
         {% for new in news %}
@@ -8,7 +8,8 @@
         {% endfor %}
     </ul>
 {% else %}
-    <p>No hay noticias disponibles</p>
+    <p>No news are availables</p>
 {% endif %}
-<a href="{% url 'baseItems:createNew' %}"><button type="button">Create New</button></a>
+<a href="{% url 'baseItems:createNew' %}"><button type="button">Create New(Function)</button></a>
 <a href="{% url 'baseItems:index' %}"><button type="button">Index</button></a>
+<a href="{% url 'baseItems:createNewClass' %}"><button type="button">Create New(Class)</button></a>

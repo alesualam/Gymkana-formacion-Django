@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.shortcuts import redirect
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+from django.urls import reverse
 from .models import Event, New
 from .forms import NewsForm
 
@@ -73,7 +76,6 @@ def new_update_v1(request, new_id):
 def new_delete_v1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
     if request.method == "POST":
-        import ipdb;ipdb.set_trace()
         new.delete()
         return redirect('baseItems:news')
 
@@ -81,3 +83,20 @@ def new_delete_v1(request, new_id):
         'new': new
     }
     return render(request, 'baseItems/confirmDelete.html', context)
+
+
+class ShowNews(ListView):
+    template_name = 'baseItems/news.html'
+    context_object_name = 'news'
+
+    def get_queryset(self):
+        return New.objects.order_by("-publish_date")
+
+
+class NewCreate(CreateView):
+    template_name = 'baseItems/newCreate.html'
+    model = New
+    fields = ['title', 'subtitle', 'body', 'image']
+
+    def get_success_url(self):
+        return reverse('baseItems:newsClass')
