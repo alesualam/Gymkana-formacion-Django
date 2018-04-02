@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^news/(?P<new_id>\d+)/$', views.detail_new, name='detailNew'),
     url(r'^v1/news/$', views.show_news, name='news'),
     url(r'^v1/new/create/$', views.new_create_v1, name='createNew'),
+    url(r'^v1/new/update/(?P<new_id>[0-9]+)/$', views.new_update_v1, name='updateNew'),
+    url(r'^v1/new/delete/(?P<new_id>[0-9]+)/$', views.new_delete_v1, name='deleteNew'),
 ]

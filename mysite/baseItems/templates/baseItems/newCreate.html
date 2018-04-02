@@ -1,6 +1,5 @@
 <h2>Nueva noticia</h2>
-<form action="{% url 'baseItems:createNew' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
     {{ form.as_p }}
-
     <button type="submit">Guardar</button>
 </form>

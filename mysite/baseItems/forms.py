@@ -6,7 +6,7 @@ from .models import New
 class NewsForm(forms.ModelForm):
     class Meta:
         model = New
-        fields = ['title', 'subtitle', 'body']
+        fields = ['title', 'subtitle', 'body', 'image']
 
     def clean_image(self):
         image = self.cleaned_data.get('image')
