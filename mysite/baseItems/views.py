@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.shortcuts import redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.urls import reverse
 from .models import Event, New
@@ -97,6 +97,18 @@ class NewCreate(CreateView):
     template_name = 'baseItems/newCreate.html'
     model = New
     fields = ['title', 'subtitle', 'body', 'image']
+
+    def get_success_url(self):
+        return reverse('baseItems:newsClass')
+
+
+class NewUpdate(UpdateView):
+    template_name = 'baseItems/newUpdate.html'
+    model = New
+    fields = ['title', 'subtitle', 'body', 'image']
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
 
     def get_success_url(self):
         return reverse('baseItems:newsClass')
