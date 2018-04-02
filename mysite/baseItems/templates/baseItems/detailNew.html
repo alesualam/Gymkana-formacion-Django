@@ -13,4 +13,5 @@
 {{ new.publish_date }}
 <br/>
 <a href="{% url 'baseItems:updateNew' new.id %}"><button type="button">Update New</button></a>
+<a href="{% url 'baseItems:deleteNew' new.id %}"><button type="button">Delete New</button></a>
 {% endblock %}

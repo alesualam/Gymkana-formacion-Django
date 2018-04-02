@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""High level support for doing this and that."""
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
+from django.shortcuts import redirect
 from .models import Event, New
 from .forms import NewsForm
 
@@ -51,10 +51,10 @@ def new_create_v1(request):
         form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            news = New.objects.all()
-            return render(request, 'baseItems/news.html', {'news': news})
+            return redirect('baseItems:news')
     else:
         form = NewsForm()
+
     return render(request, 'baseItems/newCreate.html', {'form': form})
 
 
@@ -64,7 +64,7 @@ def new_update_v1(request, new_id):
         form = NewsForm(request.POST, request.FILES, instance=new)
         if form.is_valid():
             form.save()
-            return show_news(request)
+            return redirect('baseItems:news')
     else:
         form = NewsForm(instance=new)
     return render(request, 'baseItems/newUpdate.html', {'form': form})
@@ -72,5 +72,12 @@ def new_update_v1(request, new_id):
 
 def new_delete_v1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
-    new.delete()
-    return show_news(request)
+    if request.method == "POST":
+        import ipdb;ipdb.set_trace()
+        new.delete()
+        return redirect('baseItems:news')
+
+    context = {
+        'new': new
+    }
+    return render(request, 'baseItems/confirmDelete.html', context)

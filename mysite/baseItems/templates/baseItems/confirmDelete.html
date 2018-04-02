@@ -1,0 +1,13 @@
+{% extends "baseItems/layout.html" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'baseItems/style.css' %}">
+{% block title %}
+<div class="title">New</div>{% endblock %}
+{% endblock %}
+{% block content %}
+<form method="POST"> {% csrf_token %}
+    <p>Are you sure you want to delete: "{{ new.title }}"?</p>
+    <a href="{% url 'baseItems:news' %}"><button type="submit">Confirm</button></a>
+    <a href="{% url 'baseItems:news' %}"><button type="button">Cancel</button></a>
+{% endblock %}
