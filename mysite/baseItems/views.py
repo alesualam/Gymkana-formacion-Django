@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from .models import Event, New
-from .forms import NewsForm#, ImageUploadForm
+from .forms import NewsForm
 
 
 def index(request):
@@ -64,9 +64,13 @@ def new_update_v1(request, new_id):
         form = NewsForm(request.POST, request.FILES, instance=new)
         if form.is_valid():
             form.save()
-            import ipdb;ipdb.set_trace()
-            news = New.objects.all()
-            return render(request, 'baseItems/news.html', {'news': news})
+            return show_news(request)
     else:
         form = NewsForm(instance=new)
     return render(request, 'baseItems/newUpdate.html', {'form': form})
+
+
+def new_delete_v1(request, new_id):
+    new = get_object_or_404(New, pk=new_id)
+    new.delete()
+    return show_news(request)

@@ -1,5 +1,5 @@
 .title{
-    background-color: green;
+    background-color: #5792f2;
     padding: 1%;
     width: 10.2%;
 }
@@ -8,8 +8,12 @@ h1{
     color: blue;
 }
 
+a:visited{
+    color: grey;
+}
+
 a:hover{
-    background-color: green;
+    background-color: #5792f2;
     color: white;
 }
 
