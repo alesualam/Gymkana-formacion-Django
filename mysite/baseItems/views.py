@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.shortcuts import redirect
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import Event, New
 from .forms import NewsForm
 
@@ -86,6 +86,7 @@ def new_delete_v1(request, new_id):
 
 
 class ShowNews(ListView):
+    model = New
     template_name = 'baseItems/news.html'
     context_object_name = 'news'
 
@@ -94,21 +95,24 @@ class ShowNews(ListView):
 
 
 class NewCreate(CreateView):
+    form_class = NewsForm
     template_name = 'baseItems/newCreate.html'
     model = New
-    fields = ['title', 'subtitle', 'body', 'image']
 
     def get_success_url(self):
         return reverse('baseItems:newsClass')
 
 
 class NewUpdate(UpdateView):
+    form_class = NewsForm
     template_name = 'baseItems/newUpdate.html'
     model = New
-    fields = ['title', 'subtitle', 'body', 'image']
-
-    def get(self, *args, **kwargs):
-        return self.post(*args, **kwargs)
 
     def get_success_url(self):
         return reverse('baseItems:newsClass')
+
+
+class NewDelete(DeleteView):
+    model = New
+
+    success_url = reverse_lazy('baseItems:newsClass')

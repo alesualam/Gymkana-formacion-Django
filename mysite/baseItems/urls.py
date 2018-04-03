@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^v2/news/$', views.ShowNews.as_view(), name='newsClass'),
     url(r'^v2/new/create/$', views.NewCreate.as_view(), name='createNewClass'),
     url(r'^v2/new/update/(?P<pk>[0-9]+)/$', views.NewUpdate.as_view(), name='updateNewClass'),
+    url(r'^v2/new/delete/(?P<pk>[0-9]+)/$', views.NewDelete.as_view(), name='deleteNewClass'),
 ]

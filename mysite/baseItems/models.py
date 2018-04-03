@@ -31,6 +31,8 @@ class Event(BaseItems):
 @receiver(post_delete, sender=New)
 def delete_img(sender, **kwargs):
     try:
-        os.remove(kwargs.get('instance').image.path)
+        image = kwargs.get('instance').image
+        if image.name != "/img/periodico.jpg":
+            os.remove(image.path)
     except OSError:
         pass

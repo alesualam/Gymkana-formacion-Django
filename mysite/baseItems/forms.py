@@ -1,6 +1,6 @@
 from django import forms
 from .models import New
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 
 
 class NewsForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class NewsForm(forms.ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data.get('image')
-        if isinstance(image, InMemoryUploadedFile):
+        if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
             image_name = image.name
             image_split = image_name.split('.')
             image_format = image_split[-1]
