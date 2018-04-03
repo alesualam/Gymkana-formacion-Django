@@ -11,4 +11,17 @@
 <img src="{{ new.image.url }}">
 <br/>
 {{ new.publish_date }}
+<br/>
+<p>
+    Functions
+    <br/>
+    <a href="{% url 'baseItems:updateNew' new.id %}"><button type="button">Update New</button></a>
+    <a href="{% url 'baseItems:deleteNew' new.id %}"><button type="button">Delete New</button></a>
+</p>
+<p>
+    Classes
+    <br/>
+    <a href="{% url 'baseItems:updateNewClass' new.id %}"><button type="button">Update New</button></a>
+    <a href="{% url 'baseItems:deleteNewClass' new.id %}"><button type="button">Delete New</button></a>
+</p>
 {% endblock %}

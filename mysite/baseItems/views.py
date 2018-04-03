@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-"""High level support for doing this and that."""
 from __future__ import unicode_literals
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
+from django.shortcuts import redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+from django.urls import reverse, reverse_lazy
 from .models import Event, New
 from .forms import NewsForm
 
@@ -51,8 +54,65 @@ def new_create_v1(request):
         form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            news = New.objects.all()
-            return render(request, 'baseItems/news.html', {'news': news})
+            return redirect('baseItems:news')
     else:
         form = NewsForm()
+
     return render(request, 'baseItems/newCreate.html', {'form': form})
+
+
+def new_update_v1(request, new_id):
+    new = get_object_or_404(New, pk=new_id)
+    if request.method == "POST":
+        form = NewsForm(request.POST, request.FILES, instance=new)
+        if form.is_valid():
+            form.save()
+            return redirect('baseItems:news')
+    else:
+        form = NewsForm(instance=new)
+    return render(request, 'baseItems/newUpdate.html', {'form': form})
+
+
+def new_delete_v1(request, new_id):
+    new = get_object_or_404(New, pk=new_id)
+    if request.method == "POST":
+        new.delete()
+        return redirect('baseItems:news')
+
+    context = {
+        'new': new
+    }
+    return render(request, 'baseItems/confirmDelete.html', context)
+
+
+class ShowNews(ListView):
+    model = New
+    template_name = 'baseItems/news.html'
+    context_object_name = 'news'
+
+    def get_queryset(self):
+        return New.objects.order_by("-publish_date")
+
+
+class NewCreate(CreateView):
+    form_class = NewsForm
+    template_name = 'baseItems/newCreate.html'
+    model = New
+
+    def get_success_url(self):
+        return reverse('baseItems:newsClass')
+
+
+class NewUpdate(UpdateView):
+    form_class = NewsForm
+    template_name = 'baseItems/newUpdate.html'
+    model = New
+
+    def get_success_url(self):
+        return reverse('baseItems:newsClass')
+
+
+class NewDelete(DeleteView):
+    model = New
+
+    success_url = reverse_lazy('baseItems:newsClass')
