@@ -22,7 +22,7 @@ def index(request):
 
     return render(request, 'baseItems/index.html', context)
 
-
+'''
 def detail_event(request, event_id):
     try:
         event = Event.objects.get(pk=event_id)
@@ -30,6 +30,7 @@ def detail_event(request, event_id):
         raise Http404("Event does not exist")
 
     return render(request, 'baseItems/detailEvent.html', {'event': event})
+'''
 
 
 def detail_new(request, new_id):
@@ -91,7 +92,7 @@ class ShowNews(ListView):
     context_object_name = 'news'
 
     def get_queryset(self):
-        return New.objects.order_by("-publish_date")
+        return self.model.objects.order_by("-publish_date")
 
 
 class NewCreate(CreateView):
