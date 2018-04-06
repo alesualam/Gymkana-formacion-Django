@@ -125,6 +125,7 @@ class NewTestCase(TestCase):
         num_elem_bef = New.objects.count()
         url = reverse("baseItems:updateNew", kwargs={"new_id": new.pk})
         data = {"title": "updatenew", "subtitle": "updatenew", "body": "updatebody", "image": upload_file}
+
         update_new_get = self.client.get(url, data)
         self.assertEqual(update_new_get.status_code, 200)
         num_elem_aft = New.objects.count()
@@ -136,6 +137,7 @@ class NewTestCase(TestCase):
         num_elem_bef = New.objects.count()
         url = reverse("baseItems:updateNewClass", kwargs={"pk": new.pk})
         data = {"title": "updatenew", "subtitle": "updatenew", "body": "updatebody", "image": upload_file}
+
         update_new = self.client.post(url, data)
         self.assertEqual(update_new.status_code, 302)
         num_elem_aft = New.objects.count()
@@ -145,10 +147,12 @@ class NewTestCase(TestCase):
         upload_file = open(settings.MEDIA_ROOT + '/img/indice.jpeg', 'rb')
         url = reverse("baseItems:createNew")
         data = {"title": "crearnoticiatest", "subtitle": "subtitulotest", "body": "cuerpazotest", "image": upload_file}
+
         self.client.post(url, data)
         new_test = New.objects.last()
         img_name = new_test.image.path.split("/")[-1]
         img_list = listdir(settings.MEDIA_ROOT + "/img/")
+
         self.assertTrue(img_name in img_list)
         url = reverse("baseItems:deleteNew", kwargs={"new_id": new_test.pk})
         new_delete = self.client.post(url)
@@ -181,7 +185,7 @@ class EventTestCase(TestCase):
         response = self.client.get(reverse("baseItems:detailEvent", kwargs={"event_id": event_test.pk}))
         self.assertEqual(response.status_code, 200)
 
-    def test_no_news(self):
+    def test_no_events(self):
         response = self.client.get(reverse("baseItems:detailEvent", kwargs={"event_id": 0}))
         self.assertEqual(response.status_code, 404)
 
@@ -191,6 +195,7 @@ class EventTestCase(TestCase):
         num_events_bef = Event.objects.count()
         url = reverse("baseItems:createEventClass")
         data = {"title": "eventotest2", "subtitle": "subtitulotest", "body": "cuerpotest", "start_date": start_date, "end_date": end_date}
+
         create_event_get = self.client.get(url)
         self.assertEqual(create_event_get.status_code, 200)
         num_events_aft = Event.objects.count()
@@ -207,8 +212,25 @@ class EventTestCase(TestCase):
         num_events_bef = Event.objects.count()
         url = reverse("baseItems:createEventClass")
         data = {"title": "eventotestmal", "subtitle": "subtitulotest", "body": "cuerpotest", "start_date": start_date, "end_date": end_date}
+
         create_event = self.client.post(url, data)
         self.assertEqual(create_event.status_code, 200)
         self.assertContains(create_event, "End date can&#39;t be before than start date")
         num_events_aft = Event.objects.count()
         self.assertEqual(num_events_aft, num_events_bef)
+
+    def test_update_post_class(self):
+        start_date = datetime.date.today()
+        end_date = date.today() + timedelta(20)
+        event = Event.objects.create(title="eventotestupdate", subtitle="subtitulotest", body="cuerpotest", start_date=start_date, end_date=end_date)
+        num_elem_bef = Event.objects.count()
+
+        start_date_update = datetime.date.today() + timedelta(10)
+        end_date_update = date.today() + timedelta(30)
+        url = reverse("baseItems:updateEventClass", kwargs={"pk": event.pk})
+        data = {"title": "updateEvento", "subtitle": "subtitulotest", "body": "cuerpotest", "start_date": start_date_update, "end_date": end_date_update}
+
+        update_event = self.client.post(url, data)
+        self.assertEqual(update_event.status_code, 302)
+        num_elem_aft = Event.objects.count()
+        self.assertEqual(num_elem_aft, num_elem_bef)

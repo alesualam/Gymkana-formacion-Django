@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^v2/new/delete/(?P<pk>\d+)/$', views.NewDelete.as_view(), name='deleteNewClass'),
     url(r'^v2/events/$', views.ShowEvents.as_view(), name='eventsClass'),
     url(r'^v2/event/create/$', views.EventCreate.as_view(), name='createEventClass'),
+    url(r'^v2/event/update/(?P<pk>\d+)/$', views.EventUpdate.as_view(), name='updateEventClass'),
 ]
