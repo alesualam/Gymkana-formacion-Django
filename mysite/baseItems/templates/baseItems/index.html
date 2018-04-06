@@ -16,6 +16,12 @@
         {% else %}
             <p>No events are available</p>
         {% endif %}
+        <p>
+            Using Classes
+            <br/>
+            <a href="{% url 'baseItems:createEventClass' %}"><button type="button">Create Event</button></a>
+            <a href="{% url 'baseItems:eventsClass' %}"><button type="button">List Events</button></a>
+        </p>
     </div>
     <div class="right">
         {% if latest_news_list %}

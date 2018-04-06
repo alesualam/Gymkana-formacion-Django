@@ -7,13 +7,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse, reverse_lazy
 from .models import Event, New
-from .forms import NewsForm
+from .forms import EventsForm, NewsForm
 
 
 def index(request):
 
-    """High level support for doing this and that."""
-    latest_events_list = Event.objects.order_by('-start_date')[:3]
+    latest_events_list = Event.objects.order_by('end_date')[:3]
     latest_news_list = New.objects.order_by('-publish_date')[:3]
     context = {
         'latest_events_list': latest_events_list,
@@ -22,7 +21,7 @@ def index(request):
 
     return render(request, 'baseItems/index.html', context)
 
-'''
+
 def detail_event(request, event_id):
     try:
         event = Event.objects.get(pk=event_id)
@@ -30,7 +29,6 @@ def detail_event(request, event_id):
         raise Http404("Event does not exist")
 
     return render(request, 'baseItems/detailEvent.html', {'event': event})
-'''
 
 
 def detail_new(request, new_id):
@@ -117,3 +115,36 @@ class NewDelete(DeleteView):
     model = New
 
     success_url = reverse_lazy('baseItems:newsClass')
+
+
+class ShowEvents(ListView):
+    model = Event
+    template_name = 'baseItems/events.html'
+    context_object_name = 'events'
+
+    def get_queryset(self):
+        return self.model.objects.order_by("end_date")
+
+
+class EventCreate(CreateView):
+    form_class = EventsForm
+    template_name = 'baseItems/eventCreate.html'
+    model = Event
+
+    def get_success_url(self):
+        return reverse('baseItems:eventsClass')
+
+
+class EventUpdate(UpdateView):
+    form_class = EventsForm
+    template_name = 'baseItems/eventUpdate.html'
+    model = Event
+
+    def get_success_url(self):
+        return reverse('baseItems:eventsClass')
+
+
+class EventDelete(DeleteView):
+    model = Event
+
+    success_url = reverse_lazy('baseItems:eventsClass')

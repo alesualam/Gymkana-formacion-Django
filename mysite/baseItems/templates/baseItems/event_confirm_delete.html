@@ -1,0 +1,13 @@
+{% extends "baseItems/layout.html" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'baseItems/style.css' %}">
+{% block title %}
+<div class="title">Event</div>{% endblock %}
+{% endblock %}
+{% block content %}
+<form method="POST"> {% csrf_token %}
+    <p>Are you sure you want to delete: "{{ event.title }}"?</p>
+    <a href="{% url 'baseItems:eventsClass' %}"><button type="submit">Confirm</button></a>
+    <a href="{% url 'baseItems:eventsClass' %}"><button type="button">Cancel</button></a>
+{% endblock %}

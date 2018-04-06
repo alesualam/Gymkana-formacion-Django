@@ -10,5 +10,11 @@
 <br>
 <p>{{ event.body }}</p>
 <br>
-<p>Desde el {{ event.start_date }} hasta el {{ event.end_date }}</p>
+<p>From {{ event.start_date }} to {{ event.end_date }}</p>
+<p>
+    Classes
+    <br/>
+    <a href="{% url 'baseItems:updateEventClass' event.id %}"><button type="button">Update Event</button></a>
+    <a href="{% url 'baseItems:deleteEventClass' event.id %}"><button type="button">Delete Event</button></a>
+</p>
 {% endblock %}
