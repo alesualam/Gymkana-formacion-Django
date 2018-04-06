@@ -1,5 +1,5 @@
 from django import forms
-from .models import New
+from .models import Event, New
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 
 
@@ -22,6 +22,20 @@ class NewsForm(forms.ModelForm):
                 raise forms.ValidationError("Too heavy image, less than 10 MB please")
             else:
                 return image
+
+
+class EventsForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'
+        widgets = {'start_date': forms.widgets.SelectDateWidget(years=range(2000, 2020)), 'end_date': forms.widgets.SelectDateWidget(years=range(2000, 2025))}
+
+    def clean(self):
+        cleaned_data = super(EventsForm, self).clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+        if start_date > end_date:
+            raise forms.ValidationError("End date can't be before than start date")
 
 
 class ImageUploadForm(forms.Form):

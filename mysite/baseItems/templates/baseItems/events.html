@@ -1,0 +1,14 @@
+<h2>Events</h2>
+{% if events %}
+    <ul>
+        {% for event in events %}
+            <li>
+                <a href="{% url 'baseItems:detailEvent' event.id %}">{{ event.title }} <br/> {{ event.subtitle }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No events are availables</p>
+{% endif %}
+<a href="{% url 'baseItems:index' %}"><button type="button">Index</button></a>
+<a href="{% url 'baseItems:createEventClass' %}"><button type="button">Create Event(Class)</button></a>
