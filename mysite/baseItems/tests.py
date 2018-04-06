@@ -234,3 +234,12 @@ class EventTestCase(TestCase):
         self.assertEqual(update_event.status_code, 302)
         num_elem_aft = Event.objects.count()
         self.assertEqual(num_elem_aft, num_elem_bef)
+
+    def test_delete_post_not_default_image(self):
+        start_date = datetime.date.today()
+        end_date = date.today() + timedelta(20)
+        event = Event.objects.create(title="eventotestdelete", subtitle="subtitulotest", body="cuerpotest", start_date=start_date, end_date=end_date)
+        url = reverse("baseItems:deleteEventClass", kwargs={"pk": event.pk})
+        event_delete = self.client.post(url)
+        self.assertEqual(event_delete.status_code, 302)
+        self.assertEqual(Event.objects.count(), 0)
