@@ -133,3 +133,12 @@ class EventCreate(CreateView):
 
     def get_success_url(self):
         return reverse('baseItems:eventsClass')
+
+
+class EventUpdate(UpdateView):
+    form_class = EventsForm
+    template_name = 'baseItems/eventUpdate.html'
+    model = Event
+
+    def get_success_url(self):
+        return reverse('baseItems:eventsClass')
