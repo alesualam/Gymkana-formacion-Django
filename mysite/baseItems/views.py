@@ -142,3 +142,9 @@ class EventUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('baseItems:eventsClass')
+
+
+class EventDelete(DeleteView):
+    model = Event
+
+    success_url = reverse_lazy('baseItems:eventsClass')

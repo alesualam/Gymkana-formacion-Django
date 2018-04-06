@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^v2/events/$', views.ShowEvents.as_view(), name='eventsClass'),
     url(r'^v2/event/create/$', views.EventCreate.as_view(), name='createEventClass'),
     url(r'^v2/event/update/(?P<pk>\d+)/$', views.EventUpdate.as_view(), name='updateEventClass'),
+    url(r'^v2/event/delete/(?P<pk>\d+)/$', views.EventDelete.as_view(), name='deleteEventClass'),
 ]
