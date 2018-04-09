@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^v1/new/create/$', views.new_create_v1, name='createNew'),
     url(r'^v1/new/update/(?P<new_id>\d+)/$', views.new_update_v1, name='updateNew'),
     url(r'^v1/new/delete/(?P<new_id>\d+)/$', views.new_delete_v1, name='deleteNew'),
+
     url(r'^v2/news/$', views.ShowNews.as_view(), name='newsClass'),
     url(r'^v2/new/create/$', views.NewCreate.as_view(), name='createNewClass'),
     url(r'^v2/new/update/(?P<pk>\d+)/$', views.NewUpdate.as_view(), name='updateNewClass'),
@@ -18,4 +19,7 @@ urlpatterns = [
     url(r'^v2/event/create/$', views.EventCreate.as_view(), name='createEventClass'),
     url(r'^v2/event/update/(?P<pk>\d+)/$', views.EventUpdate.as_view(), name='updateEventClass'),
     url(r'^v2/event/delete/(?P<pk>\d+)/$', views.EventDelete.as_view(), name='deleteEventClass'),
+
+    url(r'^API/events/$', views.EventsListAPI.as_view(), name='EventsListAPI'),
+    url(r'^API/events/(?P<pk>[0-9]+)/$', views.EventsDetailAPI.as_view(), name='EventsDetailAPI'),
 ]

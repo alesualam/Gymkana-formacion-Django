@@ -6,8 +6,10 @@ from django.shortcuts import redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse, reverse_lazy
+from rest_framework import generics
 from .models import Event, New
 from .forms import EventsForm, NewsForm
+from .serializers import EventSerializer
 
 
 def index(request):
@@ -148,3 +150,13 @@ class EventDelete(DeleteView):
     model = Event
 
     success_url = reverse_lazy('baseItems:eventsClass')
+
+
+class EventsListAPI(generics.ListCreateAPIView):
+    queryset = Event.objects.all().order_by('end_date')
+    serializer_class = EventSerializer
+
+
+class EventsDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
