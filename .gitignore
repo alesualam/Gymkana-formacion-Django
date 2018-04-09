@@ -106,4 +106,3 @@ venv.bak/
 # jpg images
 **/*.jpeg
 **/*.png
-**/*.gif
