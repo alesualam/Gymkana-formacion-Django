@@ -1,0 +1,15 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NEWS CREATOR</title>
+	<link rel="stylesheet" href={% static 'css/create.css' %}>
+</head>
+<body>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Send">
+	</form>
+</body>
+</html>
