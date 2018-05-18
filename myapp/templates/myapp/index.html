@@ -1,0 +1,47 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>INDEX</title>
+	<link rel="stylesheet" href={% static 'css/index.css' %}>
+</head>
+<body>
+<div class="col">
+	<h1> Latest news </h1>
+
+	{% if latest_news %}
+	    <ul>
+	    {% for i in latest_news %}
+	    	<div class="new">
+	        <h2>{{ i.title }}</h2>
+	        <h3>{{ i.subtitle }}</h3>
+	        <p>{{ i.body }}</p>
+	        <p>{{ i.publish_date }} </p>
+	        </div>
+	    {% endfor %}
+	    </ul>
+		
+	{% else %}
+	<p>No news found.</p>
+	{% endif %}
+</div>
+<div class="col">
+	<h1> Latest events </h1>
+	{% if latest_events %}
+		<ul>
+	    {% for j in latest_events %}
+	    	<div class="event">
+	        <h2>{{ j.title }}</h2>
+	        <h3>{{ j.subtitle }}</h3>
+	        <p>{{ j.body }}</p>
+	        <p>{{ j.start_date }}</p>
+	        </div>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	<p>No events found.</p>
+	{% endif %}
+</div>
+</body>
+
+</html>
