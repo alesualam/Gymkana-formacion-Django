@@ -33,12 +33,12 @@ def create(request):
     form = PostForm()
 
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
     else:
         form = PostForm()
 
     if form.is_valid():
-        new = form.save(commit=False)
+        new = form.save()
         new.save()
 
     return render(request, 'myapp/create.html', {'form': form})
