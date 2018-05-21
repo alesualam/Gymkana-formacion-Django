@@ -1,11 +1,10 @@
-{% load staticfiles%}
-<!DOCTYPE html>
-<html>
-<head>
-	<title>INDEX</title>
-	<link rel="stylesheet" href={% static 'css/index.css' %}>
-</head>
-<body>
+{% extends 'myapp/base.html' %}
+
+{% block title %}
+<title>Index</title>
+{% endblock title %}
+
+{% block content %}
 <div class="col">
 	<h1> Latest news </h1>
 
@@ -24,6 +23,9 @@
 	{% else %}
 	<p>No news found.</p>
 	{% endif %}
+	<form action="http://127.0.0.1:8000/v1/news/create/">
+    	<input type="submit" value="Create New" />
+	</form>
 </div>
 <div class="col">
 	<h1> Latest events </h1>
@@ -41,7 +43,8 @@
 	{% else %}
 	<p>No events found.</p>
 	{% endif %}
+	<form action="http://127.0.0.1:8000/v1/news/create/">
+    	<input type="submit" value="Create Event" />
+	</form>
 </div>
-</body>
-
-</html>
+{% endblock content %}
