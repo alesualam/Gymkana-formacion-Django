@@ -1,0 +1,12 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+    <head>
+    	<link rel="stylesheet" href={% static 'css/index.css' %}>
+        {% block title %}<title>My Project</title>{% endblock title %}
+    </head>
+
+    <body>
+    {% block content %}{% endblock content %}
+    </body>
+</html>
