@@ -2,11 +2,8 @@ from django import forms
 
 from django.core.exceptions import ValidationError
 
-import os
-
-from PIL import Image
-
 from .models import New
+
 
 class PostForm(forms.ModelForm):
 
