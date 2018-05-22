@@ -15,17 +15,14 @@
 	        <h2>{{ i.title }}</h2>
 	        <h3>{{ i.subtitle }}</h3>
 	        <p>{{ i.body }}</p>
-	        <p>{{ i.publish_date }} </p>
+	        <p>{{ i.publish_date|date:'d-m-Y' }} </p>
 	        </div>
 	    {% endfor %}
-	    </ul>
-		
+	    </ul>	
 	{% else %}
 	<p>No news found.</p>
 	{% endif %}
-	<form action="http://127.0.0.1:8000/v1/news/create/">
-    	<input type="submit" value="Create New" />
-	</form>
+	<a href="http://127.0.0.1:8000/v1/news/create">Create New</a>
 </div>
 <div class="col">
 	<h1> Latest events </h1>
@@ -43,8 +40,6 @@
 	{% else %}
 	<p>No events found.</p>
 	{% endif %}
-	<form action="http://127.0.0.1:8000/v1/news/create/">
-    	<input type="submit" value="Create Event" />
-	</form>
+	<a href="#">Create Event</a>
 </div>
 {% endblock content %}
