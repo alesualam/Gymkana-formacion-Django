@@ -1,15 +1,14 @@
+{% extends 'myapp/base.html' %}
+
 {% block title %}
 	<title>Create New</title>
 {% endblock title %}
 
 {% block content %}
-	<form method="post" enctype='multipart/form-data'>
-
+	<form enctype="multipart/form-data" method="post" enctype='multipart/form-data'>
 		{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Send">
 	</form>
-	<form action="http://127.0.0.1:8000/">
-    	<input type="submit" value="Cancel" />
-	</form>
+	<a href="http://127.0.0.1:8000">Cancel</a>
 {% endblock content %}

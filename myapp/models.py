@@ -23,7 +23,7 @@ class BaseItems(models.Model):
 
 class New(BaseItems):
     publish_date = models.DateTimeField(auto_now_add=True, blank=True)
-    image = models.ImageField(upload_to='images/', default=defim, validators=[FileExtensionValidator(['jpg', 'png'])])
+    image = models.ImageField(upload_to='images/', default='images/image.jpg', validators=[FileExtensionValidator(['jpg', 'png'])], blank=False)
 
 
 class Event(BaseItems):
