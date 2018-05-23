@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse, Http404
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import PostForm
 
@@ -30,6 +30,7 @@ def create(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            return redirect('/')
 
     else:
         form = PostForm()
@@ -69,7 +70,27 @@ def new_update(request, new_id):
         form = PostForm(request.POST, request.FILES, instance=new)
         if form.is_valid():
             form.save()
+            return redirect('/v1/news')
     else:
         form = PostForm()
 
     return render(request, 'myapp/create.html', {'form': form})
+
+
+def new_delete(request, new_id):
+
+    try:
+        new = New.objects.get(pk=new_id)
+    except New.DoesNotExist():
+        raise Http404("Can't get new")
+
+    instance = New.objects.get(id=new_id)
+    instance.delete()
+
+    news_list = New.objects.order_by('-publish_date')
+
+    context = {
+        'news_list': news_list
+    }
+
+    return render(request, 'myapp/list.html', context)

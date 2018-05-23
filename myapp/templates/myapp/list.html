@@ -13,6 +13,7 @@
 				<li>
 					<a href="{% url 'myapp:new_detail' i.id %}">{{ i.title }} - {{ i.subtitle }}</a>
 					<br/><a href="{% url 'myapp:new_update' i.id %}">Modify</a>
+					<a href="{% url 'myapp:new_delete' i.id %}" onclick="return confirm('Are you sure?')">Delete</a>
 				</li>
 			{% endfor %}
 		</ul>
@@ -24,3 +25,6 @@
 	</div>
 	</div>
 {% endblock content %}
+
+
+<input type="submit" onclick="return confirm('Are you sure?')"
