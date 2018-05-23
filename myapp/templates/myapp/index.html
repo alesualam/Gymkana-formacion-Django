@@ -18,7 +18,7 @@
 	        <p>{{ i.publish_date|date:'d-m-Y' }} </p>
 	        </div>
 	    {% endfor %}
-	    <a href="{% url 'myapp:create' %}">Create New</a>
+	    <a href="{% url 'myapp:create' %}">Create New</a><br/>
 	    <a href="{% url 'myapp:news_list' %}">View all News</a>
 	    </ul>	
 	{% else %}
