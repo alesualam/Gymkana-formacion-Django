@@ -56,3 +56,20 @@ def new_detail(request, new_id):
         raise Http404("Can't get new")
 
     return render(request, 'myapp/n_detail.html', {'new': new})
+
+
+def new_update(request, new_id):
+
+    try:
+        new = New.objects.get(pk=new_id)
+    except New.DoesNotExist():
+        raise Http404("Can't get new")
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=new)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PostForm()
+
+    return render(request, 'myapp/create.html', {'form': form})

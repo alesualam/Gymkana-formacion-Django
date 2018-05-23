@@ -4,16 +4,21 @@ h1 {
 }
 
 h2 {
-	color: blue;
 	font-size: 30px;
 }
 
 h3 {
-	font-size: 20px;
+	font-size: 22px;
+	font-style: oblique;
 }
 
 p {
 	font-size: 18px;
+}
+
+img {
+	max-width:50%;
+
 }
 
 .col {
@@ -38,6 +43,20 @@ p {
 	padding-bottom: 2%;
 }
 
+.new p {
+	width: 50ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.list {
+	padding-left: 2%;
+
+}
+
+.back {
+	padding-left: 2%;
+}
 
 .event {
 	border-left: solid;
@@ -48,4 +67,19 @@ p {
 	padding-left: 2%;
 	padding-right: 2%;
 	padding-bottom: 2%;
+}
+
+.new_detail {
+	padding-left:5%;
+}
+
+.new_class{
+	padding-left: 2%;
+	border-left: solid;
+	border-color: blue;
+}
+
+.new_class h2 {
+	font-size:30px;
+	color:blue;
 }
