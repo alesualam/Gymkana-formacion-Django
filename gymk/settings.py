@@ -110,7 +110,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -120,3 +120,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+MEDIA_URL = '/media/'
+
+IMAGE_DEFAULT = 'images/image.jpg'

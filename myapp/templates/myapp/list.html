@@ -1,0 +1,26 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}
+	<title>News List</title>
+{% endblock title %}
+
+{% block content %}
+	<h1>News</h1>
+	<div class="list">
+	{% if news_list %}
+		<ul>
+			{% for i in news_list %}
+				<li>
+					<a href="{% url 'myapp:new_detail' i.id %}">{{ i.title }} - {{ i.subtitle }}</a>
+					<br/><a href="{% url 'myapp:new_update' i.id %}">Modify</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>The list is empty</p>
+	{% endif %}
+	<div class="back">
+		<a href="{% url 'myapp:index' %}">Go back to Index</a>
+	</div>
+	</div>
+{% endblock content %}
