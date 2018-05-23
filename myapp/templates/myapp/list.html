@@ -9,10 +9,11 @@
 	{% if news_list %}
 		<ul>
 			{% for i in news_list %}
-				<a href="{% url 'myapp.detail' %} New.id"><p>{{ i.title }}</p></a>
+				<li><a href="{% url 'myapp:new_detail' i.id %}">{{ i.title }}<br/>{{ i.subtitle }}</a></li>
 			{% endfor %}
 		</ul>
 	{% else %}
 		<p>The list is empty</p>
 	{% endif %}
+	<a href="{% url 'myapp:index' %}">Go back to Index</a>
 {% endblock content %}
