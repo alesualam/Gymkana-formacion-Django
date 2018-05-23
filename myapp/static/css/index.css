@@ -8,11 +8,17 @@ h2 {
 }
 
 h3 {
-	font-size: 20px;
+	font-size: 22px;
+	font-style: oblique;
 }
 
 p {
 	font-size: 18px;
+}
+
+img {
+	max-width:50%;
+
 }
 
 .col {
@@ -43,6 +49,14 @@ p {
 	text-overflow: ellipsis;
 }
 
+.list {
+	padding-left: 2%;
+
+}
+
+.back {
+	padding-left: 2%;
+}
 
 .event {
 	border-left: solid;
@@ -68,9 +82,4 @@ p {
 .new_class h2 {
 	font-size:30px;
 	color:blue;
-}
-
-.new_class h3{
-	font-size: 25px;
-	font-style:oblique;
 }
