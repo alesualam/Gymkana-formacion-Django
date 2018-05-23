@@ -70,6 +70,6 @@ def new_update(request, new_id):
         if form.is_valid():
             form.save()
     else:
-        form = PostForm()
+        form = PostForm
 
     return render(request, 'myapp/create.html', {'form': form})

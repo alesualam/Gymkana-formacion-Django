@@ -19,7 +19,7 @@ class PostForm(forms.ModelForm):
         if image == settings.IMAGE_DEFAULT:
             return image
         else:
-            if image._size > 10 * 1024 * 1024:
+            if image.size > 10 * 1024 * 1024:
                 raise ValidationError("Image file too large ( > 10mb )")
             else:
                 return image
