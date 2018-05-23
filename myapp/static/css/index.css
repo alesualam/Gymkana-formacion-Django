@@ -3,11 +3,11 @@ h1 {
 	text-align: center;
 }
 
-h2{
-	font-size: 22px;
+h2 {
+	font-size: 30px;
 }
 
-h3{
+h3 {
 	font-size: 20px;
 }
 
@@ -37,6 +37,12 @@ p {
 	padding-bottom: 2%;
 }
 
+.new p {
+	width: 50ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 
 .event {
 	border-left: solid;
@@ -47,4 +53,24 @@ p {
 	padding-left: 2%;
 	padding-right: 2%;
 	padding-bottom: 2%;
+}
+
+.new_detail {
+	padding-left:5%;
+}
+
+.new_class{
+	padding-left: 2%;
+	border-left: solid;
+	border-color: blue;
+}
+
+.new_class h2 {
+	font-size:30px;
+	color:blue;
+}
+
+.new_class h3{
+	font-size: 25px;
+	font-style:oblique;
 }

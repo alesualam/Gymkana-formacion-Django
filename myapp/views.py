@@ -1,18 +1,13 @@
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
-
-from django.template import loader
+from django.http import HttpResponse, Http404
 
 from django.shortcuts import render
-
-from django import forms
 
 from .forms import PostForm
 
 from .models import Event, New
 
-from PIL import Image
 
 # Create your views here.
 def index(request):
@@ -51,3 +46,13 @@ def news_list(request):
     }
 
     return render(request, 'myapp/list.html', context)
+
+
+def new_detail(request, new_id):
+
+    try:
+        new = New.objects.get(pk=new_id)
+    except New.DoesNotExist():
+        raise Http404("Can't get new")
+
+    return render(request, 'myapp/n_detail.html', {'new': new})
