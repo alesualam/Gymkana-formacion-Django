@@ -15,6 +15,8 @@ class PostForm(forms.ModelForm):
         exclude = ('publish_date',)
 
     def clean_image(self):
+
+        import ipdb; ipdb.set_trace()
         image = self.cleaned_data.get('image', False)
         if image == settings.IMAGE_DEFAULT:
             return image

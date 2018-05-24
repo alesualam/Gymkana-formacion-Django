@@ -4,6 +4,8 @@ from django.http import HttpResponse, Http404
 
 from django.shortcuts import render, redirect
 
+from django.conf import settings
+
 from .forms import PostForm
 
 from .models import Event, New
@@ -24,7 +26,7 @@ def index(request):
 
 def create(request):
     form = PostForm()
-    form.fields['image'].initial = 'images/image.jpg'
+    form.fields['image'].initial = settings.IMAGE_DEFAULT
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -53,7 +55,7 @@ def new_detail(request, new_id):
 
     try:
         new = New.objects.get(pk=new_id)
-    except New.DoesNotExist():
+    except New.DoesNotExist:
         raise Http404("Can't get new")
 
     return render(request, 'myapp/n_detail.html', {'new': new})
@@ -63,7 +65,7 @@ def new_update(request, new_id):
 
     try:
         new = New.objects.get(pk=new_id)
-    except New.DoesNotExist():
+    except New.DoesNotExist:
         raise Http404("Can't get new")
 
     if request.method == 'POST':
@@ -72,7 +74,7 @@ def new_update(request, new_id):
             form.save()
             return redirect('/v1/news')
     else:
-        form = PostForm()
+        form = PostForm(instance=new)
 
     return render(request, 'myapp/create.html', {'form': form})
 
@@ -81,7 +83,7 @@ def new_delete(request, new_id):
 
     try:
         new = New.objects.get(pk=new_id)
-    except New.DoesNotExist():
+    except New.DoesNotExist:
         raise Http404("Can't get new")
 
     instance = New.objects.get(id=new_id)
