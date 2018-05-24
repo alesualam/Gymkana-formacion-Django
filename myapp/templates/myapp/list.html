@@ -8,15 +8,20 @@
 	<h1>News</h1>
 	<div class="list">
 	{% if news_list %}
-		<ul>
+		<table style="width:50%">
+			<tr>
+				<th>Title / subtitle</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
 			{% for i in news_list %}
-				<li>
-					<a href="{% url 'myapp:new_detail' i.id %}">{{ i.title }} - {{ i.subtitle }}</a>
-					<br/><a href="{% url 'myapp:new_update' i.id %}">Modify</a>
-					<a href="{% url 'myapp:new_delete' i.id %}" onclick="return confirm('Are you sure?')">Delete</a>
-				</li>
+				<tr>
+					<td align="center"><a href="{% url 'myapp:new_detail' i.id %}"><p>{{ i.title }} / {{ i.subtitle }}</p></a></td>
+					<td align="center"><a href="{% url 'myapp:new_update' i.id %}"><p>Modify</p></a></td>
+					<td align="center"><a style="color:red" href="{% url 'myapp:new_delete' i.id %}" onclick="return confirm('Are you sure?')">Delete</a></td>
+				</tr>
 			{% endfor %}
-		</ul>
+		</table>
 	{% else %}
 		<p>The list is empty</p>
 	{% endif %}
@@ -25,6 +30,3 @@
 	</div>
 	</div>
 {% endblock content %}
-
-
-<input type="submit" onclick="return confirm('Are you sure?')"

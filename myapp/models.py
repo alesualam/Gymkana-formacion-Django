@@ -2,6 +2,8 @@ from django.db import models
 
 from django.core.validators import FileExtensionValidator
 
+from django.conf import settings
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +25,7 @@ class BaseItems(models.Model):
 
 class New(BaseItems):
     publish_date = models.DateTimeField(auto_now_add=True, blank=True)
-    image = models.ImageField(upload_to='images/', default='images/image.jpg', validators=[FileExtensionValidator(['jpg', 'png'])], blank=False)
+    image = models.ImageField(upload_to='images/', default=settings.IMAGE_DEFAULT, validators=[FileExtensionValidator(['jpg', 'png'])], blank=False)
 
 
 class Event(BaseItems):
