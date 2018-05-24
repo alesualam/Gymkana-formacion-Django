@@ -32,7 +32,7 @@ def create(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('myapp:index')
 
     else:
         form = PostForm()
@@ -72,7 +72,7 @@ def new_update(request, new_id):
         form = PostForm(request.POST, request.FILES, instance=new)
         if form.is_valid():
             form.save()
-            return redirect('/v1/news')
+            return redirect('myapp:news_list')
     else:
         form = PostForm(instance=new)
 
