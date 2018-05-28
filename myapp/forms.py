@@ -25,7 +25,8 @@ class PostForm(forms.ModelForm):
             else:
                 return image
 
-class C_Event(forms.ModelForm):
+
+class EventForm(forms.ModelForm):
 
     start_date = DateTimeField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
     end_date = DateTimeField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
