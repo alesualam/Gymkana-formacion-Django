@@ -25,10 +25,11 @@ class PostForm(forms.ModelForm):
             else:
                 return image
 
+
 class EventForm(forms.ModelForm):
 
-    start_date = DateTimeField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
-    end_date = DateTimeField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
+    start_date = DateTimeField(widget=forms.DateInput(attrs={'placeholder': 'dd/mm/aa'}, format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
+    end_date = DateTimeField(widget=forms.DateInput(attrs={'placeholder': 'dd/mm/aa'}, format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
 
     class Meta:
         model = Event

@@ -10,7 +10,7 @@ from .forms import PostForm, EventForm
 
 from .models import Event, New
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -102,8 +102,8 @@ def new_delete(request, new_id):
 
 
 class CreateEvent(CreateView):
-    form_class = EventForm
     model = Event
+    form_class = EventForm
     template_name = 'myapp/create.html'
     success_url = reverse_lazy('myapp:index')
 
@@ -118,3 +118,12 @@ class EventDetail(DetailView):
     model = Event
     context_object_name = 'event'
     template_name = 'myapp/e_detail.html'
+
+
+class EventUpdate(UpdateView):
+    model = Event
+    form_class = EventForm
+    template_name = 'myapp/create.html'
+    success_url = reverse_lazy('myapp:events_list')
+
+#class EventDelete()

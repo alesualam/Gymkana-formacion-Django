@@ -7,7 +7,7 @@
 {% block content %}
 <div class="col">
 	<h1> Latest news </h1>
-	<center><br/><a href="{% url 'myapp:create' %}">Create New</a><br/></center>
+	<center><a href="{% url 'myapp:create' %}">Create New</a></center>
 	<center><a href="{% url 'myapp:news_list' %}">View all News</a></center>
 	{% if latest_news %}
 	    <ul>
@@ -23,7 +23,6 @@
 	{% else %}
 	<p>No news found.</p>
 	{% endif %}
-	
 </div>
 <div class="col">
 	<h1> Latest events </h1>
