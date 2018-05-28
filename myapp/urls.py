@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.views.generic import TemplateView
 
 from . import views
 
@@ -11,6 +10,4 @@ urlpatterns = [
     url(r'^v1/news/update/(?P<new_id>\d+)/$', views.new_update, name='new_update'),
     url(r'^v1/news/delete/(?P<new_id>\d+)/$', views.new_delete, name='new_delete'),
     url(r'^v2/events/create/$', views.CreateEvent.as_view(), name='event_create'),
-    #url(r'^v2/events/$', views.EventsList.as_view(), name='events_list'),
-    #url(r'^v2/events/(?P<new_id>\d+)/$', views.EventDetail.as_view(template_name='myapp/e_detail.html'), name='event_detail'),
 ]
