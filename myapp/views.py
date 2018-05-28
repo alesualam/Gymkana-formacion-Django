@@ -1,14 +1,16 @@
 from __future__ import unicode_literals
 
-from django.http import HttpResponse, Http404
+from django.http import Http404
 
 from django.shortcuts import render, redirect
 
 from django.conf import settings
 
-from .forms import PostForm
+from .forms import PostForm, EventForm
 
 from .models import Event, New
+from django.views.generic import CreateView
+from django.core.urlresolvers import reverse_lazy
 
 
 # Create your views here.
@@ -82,7 +84,7 @@ def new_update(request, new_id):
 def new_delete(request, new_id):
 
     try:
-        new = New.objects.get(pk=new_id)
+        New.objects.get(pk=new_id)
     except New.DoesNotExist:
         raise Http404("Can't get new")
 
@@ -96,3 +98,10 @@ def new_delete(request, new_id):
     }
 
     return render(request, 'myapp/list.html', context)
+
+
+class CreateEvent(CreateView):
+    form_class = EventForm
+    model = Event
+    template_name = 'myapp/create.html'
+    success_url = reverse_lazy('myapp:index')
