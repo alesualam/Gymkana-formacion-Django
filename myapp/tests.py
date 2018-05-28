@@ -3,6 +3,7 @@ from django.test import TestCase
 from myapp.models import New, Event
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.exceptions import ValidationError
 from django.conf import settings
 
 
@@ -81,7 +82,6 @@ class htmlTests(TestCase):
         form = PostForm(data=form_data)
 
         self.assertFalse(form.is_valid())
-        #self.assertFormError(response, '', 'title', 'Completa este campo')
         self.assertEqual(count, New.objects.count())
 
         # Incorrect form test due to large image file
@@ -91,7 +91,6 @@ class htmlTests(TestCase):
         response = self.client.post(reverse('myapp:create'), follow=True, data=form_data, files={'image': file})
         response = self.client.get(reverse('myapp:create'))
 
-        #self.assertFormError(response, 'form', 'image', 'Image file too large ( > 10mb )')
         self.assertEqual(response.status_code, 200)
 
 
