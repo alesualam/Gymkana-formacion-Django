@@ -122,3 +122,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 MEDIA_URL = '/media/'
 
 IMAGE_DEFAULT = 'images/image.jpg'
+LARGE_IMAGE = 'images/large_image.jpg'

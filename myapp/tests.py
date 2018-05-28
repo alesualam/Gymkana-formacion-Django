@@ -86,15 +86,13 @@ class htmlTests(TestCase):
 
         # Incorrect form test due to large image file
         form_data = {'title': 'hola', 'subtitle': 'quetal', 'body': 'body1'}
-        img = open('/home/asuarez/test/large_image.jpg', 'rb')  # Duda
+        img = open(settings.LARGE_IMAGE, 'rb')  # Duda
         file = SimpleUploadedFile(img.name, img.read())
-        import ipdb;ipdb.set_trace()
         response = self.client.post(reverse('myapp:create'), follow=True, data=form_data, files={'image': file})
-        #response = self.client.post(reverse('myapp:create'), data=form_data, files={'image': file})
+        response = self.client.get(reverse('myapp:create'))
 
-        import ipdb;ipdb.set_trace()
-        self.assertContains(response, "Image file too large ( > 10mb )")
-        self.assertEqual(response.status_code, 302)
+        #self.assertFormError(response, 'form', 'image', 'Image file too large ( > 10mb )')
+        self.assertEqual(response.status_code, 200)
 
 
     def test_news_detail(self):
