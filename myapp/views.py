@@ -10,7 +10,8 @@ from .forms import PostForm, C_Event
 
 from .models import Event, New
 from django.views import View
-
+from django.views.generic import FormView, ListView, DetailView
+from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
 def index(request):
@@ -98,18 +99,12 @@ def new_delete(request, new_id):
 
     return render(request, 'myapp/list.html', context)
 
-class CreateEvent(View):
+
+class CreateEvent(FormView):
     form_class = C_Event
     template_name = 'myapp/create.html'
+    success_url = reverse_lazy('myapp:index')
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('myapp:index')
-
-        return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        form.save()
+        return super(CreateEvent, self).form_valid(form)
