@@ -1,15 +1,17 @@
 from __future__ import unicode_literals
 
-from django.http import HttpResponse, Http404
+from django.http import Http404
 
 from django.shortcuts import render, redirect
 
 from django.conf import settings
 
-from .forms import PostForm, C_Event
+from .forms import PostForm, EventForm
 
 from .models import Event, New
-from django.views import View
+from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView
+from django.core.urlresolvers import reverse_lazy
 
 
 # Create your views here.
@@ -83,7 +85,7 @@ def new_update(request, new_id):
 def new_delete(request, new_id):
 
     try:
-        new = New.objects.get(pk=new_id)
+        New.objects.get(pk=new_id)
     except New.DoesNotExist:
         raise Http404("Can't get new")
 
@@ -98,18 +100,21 @@ def new_delete(request, new_id):
 
     return render(request, 'myapp/list.html', context)
 
-class CreateEvent(View):
-    form_class = C_Event
+
+class CreateEvent(CreateView):
+    form_class = EventForm
+    model = Event
     template_name = 'myapp/create.html'
+    success_url = reverse_lazy('myapp:index')
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('myapp:index')
+class EventsList(ListView):
+    model = Event
+    context_object_name = 'events_list'
+    template_name = 'myapp/e_list.html'
 
-        return render(request, self.template_name, {'form': form})
+
+class EventDetail(DetailView):
+    model = Event
+    context_object_name = 'event'
+    template_name = 'myapp/e_detail.html'

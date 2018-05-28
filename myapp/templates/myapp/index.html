@@ -7,7 +7,8 @@
 {% block content %}
 <div class="col">
 	<h1> Latest news </h1>
-
+	<center><br/><a href="{% url 'myapp:create' %}">Create New</a><br/></center>
+	<center><a href="{% url 'myapp:news_list' %}">View all News</a></center>
 	{% if latest_news %}
 	    <ul>
 	    {% for i in latest_news %}
@@ -22,11 +23,12 @@
 	{% else %}
 	<p>No news found.</p>
 	{% endif %}
-	<br/><a href="{% url 'myapp:create' %}">Create New</a><br/>
-	<a href="{% url 'myapp:news_list' %}">View all News</a>
+	
 </div>
 <div class="col">
 	<h1> Latest events </h1>
+	<center><a href="{% url 'myapp:event_create' %}">Create Event</a></center>
+	<center><a href="{% url 'myapp:events_list' %}">View all Events</a></center>
 	{% if latest_events %}
 		<ul>
 	    {% for j in latest_events %}
@@ -41,6 +43,5 @@
 	{% else %}
 	<p>No events found.</p>
 	{% endif %}
-	<a href="{% url 'myapp:event_create' %}">Create Event</a>
 </div>
 {% endblock content %}
