@@ -34,13 +34,13 @@
 	        <h2>{{ j.title }}</h2>
 	        <h3>{{ j.subtitle }}</h3>
 	        <p>{{ j.body }}</p>
-	        <p>{{ j.start_date }}</p>
+	        <p>From {{ j.start_date|date:'d-m-Y' }} to {{ j.end_date|date:'d-m-Y' }}</p>
 	        </div>
 	    {% endfor %}
 	    </ul>
 	{% else %}
 	<p>No events found.</p>
 	{% endif %}
-	<a href="#">Create Event</a>
+	<a href="{% url 'myapp:event_create' %}">Create Event</a>
 </div>
 {% endblock content %}

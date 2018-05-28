@@ -6,9 +6,10 @@ from django.shortcuts import render, redirect
 
 from django.conf import settings
 
-from .forms import PostForm
+from .forms import PostForm, C_Event
 
 from .models import Event, New
+from django.views import View
 
 
 # Create your views here.
@@ -96,3 +97,19 @@ def new_delete(request, new_id):
     }
 
     return render(request, 'myapp/list.html', context)
+
+class CreateEvent(View):
+    form_class = C_Event
+    template_name = 'myapp/create.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:index')
+
+        return render(request, self.template_name, {'form': form})
