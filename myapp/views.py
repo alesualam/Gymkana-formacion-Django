@@ -5,14 +5,12 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.conf import settings
 
-from django.conf import settings
-
 from .forms import PostForm, EventForm
 
 from .models import Event, New
 from django.views.generic.edit import CreateView
 
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
 
