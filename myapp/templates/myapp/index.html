@@ -23,6 +23,8 @@
 	{% else %}
 	<p>No news found.</p>
 	{% endif %}
+	<br/><a href="{% url 'myapp:create' %}">Create New</a><br/>
+	<a href="{% url 'myapp:news_list' %}">View all News</a>
 </div>
 <div class="col">
 	<h1> Latest events </h1>

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.http import Http404
 
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 from django.conf import settings
 
@@ -85,6 +86,7 @@ def new_delete(request, new_id):
 
     try:
         New.objects.get(pk=new_id)
+
     except New.DoesNotExist:
         raise Http404("Can't get new")
 
@@ -98,10 +100,3 @@ def new_delete(request, new_id):
     }
 
     return render(request, 'myapp/list.html', context)
-
-
-class CreateEvent(CreateView):
-    form_class = EventForm
-    model = Event
-    template_name = 'myapp/create.html'
-    success_url = reverse_lazy('myapp:index')
