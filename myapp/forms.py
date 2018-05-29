@@ -16,6 +16,7 @@ class PostForm(forms.ModelForm):
         exclude = ('publish_date',)
 
     def clean_image(self):
+
         image = self.cleaned_data.get('image', False)
         if image == settings.IMAGE_DEFAULT:
             return image
@@ -28,8 +29,8 @@ class PostForm(forms.ModelForm):
 
 class EventForm(forms.ModelForm):
 
-    start_date = DateTimeField(widget=forms.DateInput(attrs={'placeholder': 'dd/mm/aa'}, format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
-    end_date = DateTimeField(widget=forms.DateInput(attrs={'placeholder': 'dd/mm/aa'}, format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
+    start_date = DateTimeField(widget=forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}, format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
+    end_date = DateTimeField(widget=forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}, format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
 
     class Meta:
         model = Event
