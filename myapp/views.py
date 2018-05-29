@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.http import Http404
 
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 from django.conf import settings
 
@@ -11,6 +12,7 @@ from .forms import PostForm, EventForm
 from .models import Event, New
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -99,7 +101,6 @@ def new_delete(request, new_id):
     }
 
     return render(request, 'myapp/list.html', context)
-
 
 class CreateEvent(CreateView):
     form_class = EventForm

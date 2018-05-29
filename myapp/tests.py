@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from myapp.models import New, Event
+
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.exceptions import ValidationError
@@ -143,3 +144,4 @@ class htmlTests(TestCase):
         # Deleting a new that wasn't created
         response = self.client.get(reverse('myapp:new_delete', kwargs={'new_id': 1}))
         self.assertEquals(response.status_code, 404)
+
