@@ -7,6 +7,8 @@ from .models import New, Event
 
 from django.conf import settings
 
+import datetime
+
 
 class PostForm(forms.ModelForm):
 
@@ -37,11 +39,16 @@ class EventForm(forms.ModelForm):
         field = ('title', 'subtitle', 'body', 'start_date', 'end_date')
         exclude = ()
 
-    def clean_end_date(self):
+    def clean(self):
         start_date = self.cleaned_data.get('start_date', False)
         end_date = self.cleaned_data.get('end_date', False)
+
+        if start_date is False:
+            raise ValidationError("Wrong format")
+        if end_date is False:
+            raise ValidationError("Wrong format")
 
         if start_date > end_date:
             raise ValidationError("Ending date must be set after Starting date")
         else:
-            return end_date
+            return self.cleaned_data

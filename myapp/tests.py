@@ -144,7 +144,6 @@ class NewsTests(TestCase):
         self.assertEquals(response.status_code, 404)
 
 
-
 class EventsTests(TestCase):
 
         def test_index(self):
