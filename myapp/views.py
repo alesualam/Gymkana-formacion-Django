@@ -5,14 +5,11 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.conf import settings
 
-from django.conf import settings
-
 from .forms import PostForm, EventForm
 
 from .models import Event, New
-from django.views.generic.edit import CreateView
 
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -102,6 +99,7 @@ def new_delete(request, new_id):
 
     return render(request, 'myapp/list.html', context)
 
+
 class CreateEvent(CreateView):
     model = Event
     form_class = EventForm
@@ -127,8 +125,8 @@ class EventUpdate(UpdateView):
     template_name = 'myapp/create.html'
     success_url = reverse_lazy('myapp:events_list')
 
+
 class EventDelete(DeleteView):
     model = Event
     template_name = 'myapp/event_confirm_delete.html'
     success_url = reverse_lazy('myapp:events_list')
-
