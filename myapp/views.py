@@ -10,6 +10,8 @@ from django.conf import settings
 from .forms import PostForm, EventForm
 
 from .models import Event, New
+from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView
 from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
 
@@ -86,7 +88,6 @@ def new_delete(request, new_id):
 
     try:
         New.objects.get(pk=new_id)
-
     except New.DoesNotExist:
         raise Http404("Can't get new")
 
@@ -100,3 +101,21 @@ def new_delete(request, new_id):
     }
 
     return render(request, 'myapp/list.html', context)
+
+class CreateEvent(CreateView):
+    form_class = EventForm
+    model = Event
+    template_name = 'myapp/create.html'
+    success_url = reverse_lazy('myapp:index')
+
+
+class EventsList(ListView):
+    model = Event
+    context_object_name = 'events_list'
+    template_name = 'myapp/e_list.html'
+
+
+class EventDetail(DetailView):
+    model = Event
+    context_object_name = 'event'
+    template_name = 'myapp/e_detail.html'

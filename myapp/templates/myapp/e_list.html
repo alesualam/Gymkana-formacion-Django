@@ -1,0 +1,32 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}
+	<title>Events List</title>
+{% endblock title %}
+
+{% block content %}
+	<h1>Events</h1>
+	<div class="list">
+	{% if events_list %}
+		<table style="width:50%">
+			<tr>
+				<th>Title / Start date</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+			{% for i in events_list %}
+				<tr>
+					<td align="center"><a href="{% url 'myapp:events_detail' i.id %}"><p>{{ i.title }} / {{ i.start_date|date:'d-m-Y' }}</p></a></td>
+					<td align="center"><a href="{% url 'myapp:new_update' i.id %}"><p>Modify</p></a></td>
+					<td align="center"><a style="color:red" href="{% url 'myapp:new_delete' i.id %}" onclick="return confirm('Are you sure?')">Delete</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<p>The list is empty</p>
+	{% endif %}
+	<div class="back">
+		<a href="{% url 'myapp:index' %}">Go back to Index</a>
+	</div>
+	</div>
+{% endblock content %}

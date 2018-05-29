@@ -26,7 +26,6 @@ class PostForm(forms.ModelForm):
             else:
                 return image
 
-
 class EventForm(forms.ModelForm):
 
     start_date = DateTimeField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=["%d/%m/%Y"])
