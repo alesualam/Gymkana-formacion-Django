@@ -129,5 +129,5 @@ class EventUpdate(UpdateView):
 
 class EventDelete(DeleteView):
     model = Event
-    #template_name = 'myapp/event_confirm_delete.html'
+    template_name = 'myapp/event_confirm_delete.html'
     success_url = reverse_lazy('myapp:events_list')
